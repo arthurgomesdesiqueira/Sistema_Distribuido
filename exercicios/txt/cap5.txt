@@ -1,0 +1,50 @@
+Cap 5 Exercicios
+
+1) Aplicação WEB ou telefone na minha opinião é um bom exemplo, porque você precisa resolver todos os caminhos da URL ou dos números para depois acessar o recurso que queremos, tipo no telefone precisamos saber que o +55 é no brasil, 11 que é em sao paulo para ai sim a gente executar o número e ligar para a pessoa
+
+2) As vantagens são:
+
+- O serviço de nomes de domínio permite uma associação global de nomes a recursos.
+- É implementado de forma distribuída, em servidores de nomes que permitem uma gestão hierárquica segundo sequências de domínios.
+- Cada parte de um nome é resolvida em relação a um contexto separado e o mesmo nome pode ser usado com diferente  significados, em diferentes contextos 
+- Outra vantagem em potencial é que diferentes contextos podem ser gerenciados por diferente pessoas.
+
+3) O papel do serviço de nomes desempenha um papel importante para se conseguir transparência de localização, porque ele faz a tradução de nome para endereço, ou seja, se a gente recebe um endereço 12.34.56.78 a gente sabe a localização para acessar a entidade, quando colocamos um nome aleatório tipo "Ola mundo", se vocẽ perceber esse nome não da indicio nenhum de onde se localiza a entidade, por isso, utilizamos o serviço de nome que traduz esse nome para o endereço, ou seja, "Ola mundo" -> 12.34.56.78, mas a gente so viria o nome e não o endereço garantindo transparencia de localização. Caso um servidor mude de localização ou faça a migração dos seus arquivos para outro. Podemos apenas registrar o novo servidor com o mesmo nome e atualizar o nome para esse novo servidor
+
+4) Nao, para operar sobre uma entidade, é preciso acessá-la em um ponto de acesso. Pontos de acesso são entidades cujos nomes são endereços. Ex: endereços IP. Utilizamos o serviço de nomes como meio para traduzir esses nomes para esses endereços. Para resolução de nomes temos o iterativa e recursiva
+
+5) Um nome independente de localização significa que o nome da entidade é independente do seu endereço. Apenas considerando o nome, nada pode ser dito sobre o endereço da entidade associada. Logo, os dois exemplos são independentes de localização, embora o primeiro dê menos dicas de onde se encontra a localização da entidade
+
+6) O Identificador Globalmente Único é gerado de forma que nenhum outro será gerado igual ou quase nunca terá o mesmo número. Eles são implementados através da utilização de números grandes (2 elevado a 128), eles possuem capacidade considerada quase infinita. Não há garantias que o GUID seja único sempre. Até existem versões que garantem, mas pode usar a versão que não garante. Mesmo não garantindo, a possibilidade de haver colisão é muito pequena, desprezível.
+
+****7) Além da solução trivial de usar vários threads para resolver as requisições, podemos distribuir as requisições. Podemos definir um número X de transações que será processado nesse nó raiz. Se passarmos de X, começamos a responder para o cliente, o endereço do próximo servidor a ser consultado. Caso esse nó ultrapasse X, repetimos
+
+8) O bom de usar so iterativa que ele diminui a carga do servidor raiz e não fica acumulando como no recursiva mas o problema quando vamos fazer requisições para servidores numa distância muito longa, demorando muito tempo, dependendo do endereço, ele terá que chamar o servidor varias vezes e custara muito tempo
+
+9) O funcionamento da cache em sistema de nomes funciona como uma cache normal, depois de receber uma consulta e retornar onde a entidade está ele grava temporariamente esses dados da entidade pra que quando fizer a mesma consulta, inves dele fazer todo o processo ele usa esses dados da cache e já acessa os dados direto.
+
+O uso do cache é importante para o desempenho do serviço de nomes e ajuda da manutenção da disponibilidade tanto dos serviços de nomes, como de outros serviços, a respeito de falhas do servidor de nome. Sua função na melhoria dos tempos de resposta, economizando na comunicação com servidores de nome, é clara. A cache pode ser utilizada para eliminar servidores de nomes de alto nível - servidor raiz em particular - do caminho de navegação, permitindo que a resolução prossiga, apesar de algumas falhas de servidor.
+
+10) O motivo para o uso de resolução recursiva de nomes no DNS são mais simples pro cliente, mantém os resultados intermediários em cache, cada servidor de nomes no caminho aprende gradativamente o endereço de cada servidor de nomes de nível mais baixo, custos de comunicação podem ser reduzidos e quando se trata de uma escala geografica onde o servidor está longe, o recursivo é melhor
+
+11) O motivo para o uso de resolução iterativa de nomes no DNS são diminui a carga do servidor raiz, não fica acumulando como no recursiva e quando se trata de uma escala de tamanho, uma quantidade alta de requisições, o iterativo é melhor
+
+12) O efeito sobre o desempenho da consulta é positivo já que podemos utilizar dois meios para resolver a resolução de nomes, como mencionado na questao 10 e 11 podemos utilizar ela em nossa vantagem para o sistema quando temos uma escala de tamanho alta usamos iterativa, quando for escala geografica utilizamos recursiva
+
+13) 
+
+14) A razão para este comportamento é que no serviço de nomes baseado em atributos cada entidade inves de um identificador único, utilizados atributos que basicamente seria um conjunto de caracteristicas que colocamos na entidade. Quando fazemos uma busca para esse serviço de descoberta, passamos varias caracteristicas. Caso a entidade de match com essas caracteristicas ele retorna como resposta, então pode ser que recebemos varias entidades como resposta. O cliente usa da forma que ele quer, se quiser usar todos os itens ou apenas um.
+
+15) Os exemplos de atributos para caracterizar as entidades são as funções principais de cada equipamento por exemplo temos geladeira onde é grande, fica na cozinha, tem um aspecto gelado, guarda comida, outro exemplo seria som relacionado a barulho pode ser grande ou pequeno, fica em qualquer lugar da casa. Quando fazemos a consulta, podemos perguntar o lugar onde geralmente ficam, tamanho dele, função, etc.
+
+
+
+Espaço Plano de Nomes:
+nomes sem estrutura
+utilizado no início da internet, mantido por entidade central
+Vantagens:
+- nomes pequenos
+Desvantagens:
+- conflitos de nomes
+- trabalho excessivo para entidade central
+- pouca escalabilidade (suporte ao crescimento do nro de nomes)
